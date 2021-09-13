@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 HOST_DB = "main_back_db"
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_api_key',
+    'authentication.apps.AuthenticateConfig'
 ]
 
 MIDDLEWARE = [
