@@ -3,7 +3,11 @@ from .models import UserProfile
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone',)
+    list_display = ('user',
+                    'cards',
+                    'gender',
+                    'second_mail',
+                    'phone')
     search_fields = ('user__username',)
 
 
