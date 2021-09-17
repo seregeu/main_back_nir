@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_api_key',
-    'authentication.apps.AuthenticateConfig'
+    'authentication.apps.AuthenticateConfig',
+    'app_api.apps.AppApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -73,7 +74,11 @@ TEMPLATES = [
     },
 ]
 
-
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+  ),
+}
 
 WSGI_APPLICATION = 'main_back.wsgi.application'
 

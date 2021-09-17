@@ -35,11 +35,10 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(required=True, min_length=4)
     password = serializers.CharField(write_only=True, required=True)
     email = serializers.CharField(write_only=True, required=True)
-    second_mail = serializers.CharField(write_only=True, required=True)
-    cards = serializers.CharField(write_only=True, required=True)
-    gender = serializers.CharField(write_only=True, required=True)
+    second_mail = serializers.CharField(write_only=True, required=False)
+    cards = serializers.CharField(write_only=True, required=False)
+    gender = serializers.CharField(write_only=True, required=False)
     phone = serializers.CharField(write_only=True, required=True, min_length=10)
-    user_id = serializers.IntegerField(write_only=True, required=False)
 
     def validate_username(self, value):
         if User.objects.filter(username=value).first():
@@ -76,4 +75,4 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'phone', 'gender',
-                  'second_mail', 'cards', 'user_id')
+                  'second_mail', 'cards')

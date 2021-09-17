@@ -15,4 +15,3 @@ class UserProfile(models.Model):
                 f"cards: {self.cards} "\
                 f"second_mail: {self.second_mail} "\
                 f"phone: {self.phone}"
-

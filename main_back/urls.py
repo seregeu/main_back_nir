@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/token/auth/', ObtainJSONWebTokenWithSignal.as_view()),
     path('admin/', admin.site.urls),
     path('api/account/', include('authentication.urls')),
+    path('api/app/', include('app_api.urls'))
 ]
