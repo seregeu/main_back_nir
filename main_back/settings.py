@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_api_key',
     'authentication.apps.AuthenticateConfig',
-    'app_api.apps.AppApiConfig'
+    'app_api.apps.AppApiConfig',
+    'actions_api.apps.ActionsApiConfig'
 ]
 
 MIDDLEWARE = [

@@ -5,3 +5,4 @@ class AppApiSerializer(serializers.Serializer):
     rating = serializers.IntegerField()
     image_url = serializers.CharField(max_length=100)
     downloads_amount = serializers.IntegerField()
+    app_id = serializers.IntegerField()

@@ -7,9 +7,11 @@ class AppApi(models.Model):
     rating = models.IntegerField()
     image_url = models.CharField(max_length=100)
     downloads_amount = models.IntegerField()
+    app_id = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"title: {self.title} " \
+        return f"app_id: {self.app_id} " \
+               f"title: {self.title} " \
                f"rating: {self.rating} " \
                f"image_url: {self.image_url} " \
                f"download amount: {self.downloads_amount}"

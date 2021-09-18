@@ -4,7 +4,8 @@ from app_api.models import AppApi, Download, Comment
 
 
 class AppApiAdmin(admin.ModelAdmin):
-    list_display = ('title',
+    list_display = ('app_id',
+                    'title',
                     'rating',
                     'image_url',
                     'downloads_amount'
