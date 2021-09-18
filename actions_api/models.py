@@ -22,7 +22,7 @@ class Action(models.Model):
         return f"app_id: {self.app_id} " \
                f"user: {self.user.username} " \
                f"date: {self.date} " \
-               f"action_type: {self.action_type}"\
-               f"data: {self.date} " \
+               f"action_type: {self.action_type} "\
+               f"data: {self.data} " \
 
 
