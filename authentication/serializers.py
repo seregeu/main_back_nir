@@ -10,7 +10,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('phone', 'gender',
-                  'second_mail', 'img_url', 'cards')
+                  'second_mail', 'img_url', 'cards', 'bot')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -40,6 +40,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     gender = serializers.CharField(write_only=True, required=False)
     phone = serializers.CharField(write_only=True, required=True, min_length=10)
     img_url = serializers.CharField(write_only=True, required=False, max_length=200)
+    bot = serializers.BooleanField(required=False)
 
     def validate_username(self, value):
         if User.objects.filter(username=value).first():
@@ -62,6 +63,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         second_mail = validated_data.pop('second_mail', None)
         cards = validated_data.pop('cards', None)
         img_url = validated_data.pop('img_url', None)
+        bot = validated_data.pop('bot', None)
         instance = self.Meta.model(**validated_data)
         instance.set_password(password)
         instance.save()
@@ -71,6 +73,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         instance.profile.second_mail = second_mail
         instance.profile.cards = cards
         instance.profile.img_url = img_url
+        instance.profile.bot = bot
         instance.profile.save()
 
         return instance
@@ -78,4 +81,4 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'phone', 'gender',
-                  'second_mail', 'cards', 'img_url')
+                  'second_mail', 'cards', 'img_url', 'bot')

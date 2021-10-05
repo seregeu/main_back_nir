@@ -8,7 +8,8 @@ class UserProfileAdmin(admin.ModelAdmin):
                     'gender',
                     'second_mail',
                     'phone',
-                    'img_url')
+                    'img_url',
+                    'bot')
     search_fields = ('user__username',)
 
 
