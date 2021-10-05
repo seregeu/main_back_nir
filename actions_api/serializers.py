@@ -18,4 +18,5 @@ class ActionAPIWithUserSerializer(serializers.Serializer):
 
 class CommentAPISerializer(serializers.Serializer):
     content = serializers.CharField(max_length=200)
+    username = serializers.CharField(max_length=100)
     user = UserProfileSerializer()

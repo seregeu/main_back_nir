@@ -26,9 +26,11 @@ class Comment:
     def __init__(self, user, content):
         self.user = user
         self.content = content
+        self.username = user.user.username
 
     def __str__(self):
         return f"content: {self.content} " \
+               f"username:{self.username}" \
                f"user: {self.user} "
 
 
@@ -36,7 +38,7 @@ class CommentAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
-        queryset = Action.objects.all().filter(app_id=pk)
+        queryset = Action.objects.all().filter(app_id=pk, action_type=1)
         print(queryset)
         serializer_actions = ActionAPIWithUserSerializer(queryset, many=True)
         comment_list = []
@@ -44,7 +46,7 @@ class CommentAPIView(APIView):
             print(data_act)
             user = get_object_or_404(User, username=data_act['user'])
             user_profile = get_object_or_404(UserProfile, user=user)
-            comment = Comment(user=user_profile, content=serializer_actions.data[0]['data'])
+            comment = Comment(user=user_profile, content=data_act['data'])
             comment_list.append(comment)
         print(comment_list)
         serializer = CommentAPISerializer(comment_list, many=True)

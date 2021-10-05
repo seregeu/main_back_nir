@@ -7,7 +7,8 @@ class UserProfileAdmin(admin.ModelAdmin):
                     'cards',
                     'gender',
                     'second_mail',
-                    'phone')
+                    'phone',
+                    'img_url')
     search_fields = ('user__username',)
 
 

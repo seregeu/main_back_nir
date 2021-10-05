@@ -5,7 +5,7 @@ from authentication.models import UserProfile
 class AppApi(models.Model):
     title = models.CharField(max_length=20)
     rating = models.IntegerField()
-    image_url = models.CharField(max_length=100)
+    image_url = models.CharField(max_length=200)
     downloads_amount = models.IntegerField()
     app_id = models.IntegerField(default=0)
 

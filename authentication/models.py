@@ -8,9 +8,11 @@ class UserProfile(models.Model):
     cards = models.CharField(max_length=16, default="")
     second_mail = models.CharField(max_length=20, default="")
     phone = models.CharField(max_length=15, default="")
+    img_url = models.CharField(max_length=200, default="")
 
     def __str__(self):
         return f"Username: {self.user.username} "\
+                f"img_url: {self.img_url}"\
                 f"gender: {self.gender} "\
                 f"cards: {self.cards} "\
                 f"second_mail: {self.second_mail} "\
