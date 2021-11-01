@@ -35,11 +35,11 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(required=True, min_length=4)
     password = serializers.CharField(write_only=True, required=True)
     email = serializers.CharField(write_only=True, required=True)
-    second_mail = serializers.CharField(write_only=True, required=False)
-    cards = serializers.CharField(write_only=True, required=False)
+    second_mail = serializers.CharField(write_only=True, required=False, default="", allow_blank=True)
+    cards = serializers.CharField(write_only=True, required=False, default="", allow_blank=True)
     gender = serializers.CharField(write_only=True, required=False)
     phone = serializers.CharField(write_only=True, required=True, min_length=10)
-    img_url = serializers.CharField(write_only=True, required=False, max_length=200)
+    img_url = serializers.CharField(write_only=True, required=False, max_length=200, default="", allow_blank=True)
     bot = serializers.BooleanField(required=False)
 
     def validate_username(self, value):
@@ -50,10 +50,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value):
         user = User(username=self.initial_data.get('username'))
-        try:
-            validators.validate_password(password=value, user=user)
-        except exceptions.ValidationError as e:
-            raise serializers.ValidationError(e.messages)
         return value
 
     def create(self, validated_data):
@@ -61,7 +57,10 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         phone = validated_data.pop('phone', None)
         gender = validated_data.pop('gender', None)
         second_mail = validated_data.pop('second_mail', None)
-        cards = validated_data.pop('cards', None)
+        try:
+            cards = validated_data.pop('cards', None)
+        except:
+            cards = ""
         img_url = validated_data.pop('img_url', None)
         bot = validated_data.pop('bot', None)
         instance = self.Meta.model(**validated_data)
