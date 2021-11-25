@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-HOST_DB = "main_back_db"
+#HOST_DB = "main_back_db"
+HOST_DB = "127.0.0.1"
 
 
 # Application definition

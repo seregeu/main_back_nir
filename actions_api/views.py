@@ -9,6 +9,9 @@ from actions_api.models import Action
 from actions_api.serializers import ActionAPISerializer, CommentAPISerializer, ActionAPIWithUserSerializer
 from authentication.models import UserProfile
 
+from pandas import DataFrame
+from bot_detected.data import Data
+
 
 class ActionAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -17,6 +20,14 @@ class ActionAPIView(APIView):
         serializer = ActionAPISerializer(data=request.data)
         if serializer.is_valid():
             Action.objects.create(**serializer.data, user=request.user)
+
+            print("Action from", request.user.id)
+            if not len(user_activity := list(Action.objects.filter(user=request.user.id).values())) % 2:
+                print('% 10 == 0!')
+                data = Data(act=DataFrame(user_activity),
+                            users=DataFrame(list(UserProfile.objects.filter(user=request.user.id).values())))
+                data.data_preparation()
+                data.bot_detected()
         else:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(status=status.HTTP_200_OK)

@@ -6,7 +6,7 @@ from authentication.serializers import UserProfileSerializer
 
 class ActionAPISerializer(serializers.Serializer):
     app_id = serializers.IntegerField()
-    data = serializers.CharField(max_length=200, default="")
+    data = serializers.CharField(max_length=200, default="", allow_blank=True)
     action_type = serializers.ChoiceField(choices=[1, 2, 3, 4, 5], required=True)
 
 class ActionAPIWithUserSerializer(serializers.Serializer):
